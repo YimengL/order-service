@@ -10,3 +10,11 @@ spring:
     name: order-service
   lifecycle:
     timeout-per-shutdown-phase: 15s # Defines a 15 s grace period
+  r2dbc:
+    username: user
+    password: password
+    url: r2dbc:postgresql://localhost:5432/polardb_order
+    pool:
+      max-create-connection-time: 2s
+      initial-size: 5 # The initial size of the connection pool
+      max-size: 10 # The maximum number of connections kept in the pool
