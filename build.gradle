@@ -13,8 +13,14 @@ java {
 	}
 }
 
+
 repositories {
 	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "2025.0.0") // Defines the Spring Cloud version to use
+	set('testcontainersVersion', "1.19.8") // Defines the Testcontainers version to use
 }
 
 dependencies {
@@ -32,10 +38,18 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'com.squareup.okhttp3:mockwebserver'
 	testImplementation 'org.testcontainers:junit-jupiter'
 	testImplementation 'org.testcontainers:postgresql'
 	testImplementation 'org.testcontainers:r2dbc'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}" // BOM for Spring Cloud dependency management
+		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}" // BOM for Testcontainers dependency management
+	}
 }
 
 tasks.named('test') {
