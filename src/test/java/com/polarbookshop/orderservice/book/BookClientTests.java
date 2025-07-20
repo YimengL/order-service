@@ -33,6 +33,7 @@ public class BookClientTests {
         this.mockWebServer.shutdown(); // Shuts the mock server down after completing a test case
     }
 
+
     @Test
     void whenBookExistsThenReturnBook() {
         var bookIsbn = "1234567890";
@@ -58,4 +59,17 @@ public class BookClientTests {
     }
 
 
+    @Test
+    void whenBookNotExistsThenReturnEmpty() {
+        var bookIsbn = "1234567891";
+        var mockResponse = new MockResponse()
+                .addHeader(CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .setResponseCode(404);
+
+        mockWebServer.enqueue(mockResponse);
+
+        StepVerifier.create(bookClient.getBookByIsbn(bookIsbn))
+                .expectNextCount(0)
+                .verifyComplete();
+    }
 }
