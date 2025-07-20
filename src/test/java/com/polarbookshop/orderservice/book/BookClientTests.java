@@ -55,6 +55,7 @@ public class BookClientTests {
                 .expectNextMatches(
                         b -> b.isbn().equals(bookIsbn)
                 ).verifyComplete();
-
     }
+
+
 }
