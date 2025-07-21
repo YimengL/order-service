@@ -3,7 +3,7 @@ on: push
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: polarbookshop/order-service
+  IMAGE_NAME: yimengl/order-service
   VERSION: latest
 
 jobs:
